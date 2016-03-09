@@ -27,7 +27,21 @@ public class ChartAxisLabel {
     }()
     
     public init(text: String, settings: ChartLabelSettings) {
-        self.text = text
+        if text == "50" {
+            self.text = "Red"
+        } else if text == "60" {
+            self.text = "Orange"
+        } else if text == "70" {
+            self.text = "Yellow"
+        } else if text == "80" {
+            self.text = "Light Green"
+        } else if text == "100" {
+            self.text = "Dark Green"
+        } else if text == "0" || text == "10" || text == "20" || text == "30" || text == "40" || text == "90" {
+            self.text = ""
+        } else {
+            self.text = text
+        }
         self.settings = settings
     }
 }

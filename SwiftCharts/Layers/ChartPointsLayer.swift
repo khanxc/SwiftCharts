@@ -32,7 +32,13 @@ public class ChartPointsLayer<T: ChartPoint>: ChartCoordsSpaceLayer {
     
     public init(xAxis: ChartAxisLayer, yAxis: ChartAxisLayer, innerFrame: CGRect, chartPoints: [T], displayDelay: Float = 0) {
         self.chartPointsModels = chartPoints.enumerate().map {index, chartPoint in
-            let screenLoc = CGPointMake(xAxis.screenLocForScalar(chartPoint.x.scalar), yAxis.screenLocForScalar(chartPoint.y.scalar))
+            var points = 0
+            if chartPoints.count == 2 { points = 26 }
+            else if chartPoints.count == 4 { points = 15 }
+            else if chartPoints.count == 6 { points = 12 }
+            else if chartPoints.count == 8 { points = 8 }
+            else { points = 0 }
+            let screenLoc = CGPointMake(xAxis.screenLocForScalar(chartPoint.x.scalar) + CGFloat((index%2 == 0 ? -points : +points)), yAxis.screenLocForScalar(chartPoint.y.scalar))
             return ChartPointLayerModel(chartPoint: chartPoint, index: index, screenLoc: screenLoc)
         }
         
