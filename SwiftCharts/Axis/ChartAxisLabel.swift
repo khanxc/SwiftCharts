@@ -11,6 +11,14 @@ import UIKit
 /// A model of an axis label
 public class ChartAxisLabel {
 
+    struct YAxis {
+        static let red          = "Red"
+        static let orange       = "Orange"
+        static let yellow       = "Yellow"
+        static let lightGreen   = "Light Green"
+        static let darkGreen    = "Dark Green"
+    }
+
     public let text: String
     let settings: ChartLabelSettings
 
@@ -28,15 +36,15 @@ public class ChartAxisLabel {
     
     public init(text: String, settings: ChartLabelSettings) {
         if text == "50" {
-            self.text = "Red"
+            self.text = YAxis.red.localized()
         } else if text == "60" {
-            self.text = "Orange"
+            self.text = YAxis.orange.localized()
         } else if text == "70" {
-            self.text = "Yellow"
+            self.text = YAxis.yellow.localized()
         } else if text == "80" {
-            self.text = "Light Green"
+            self.text = YAxis.lightGreen.localized()
         } else if text == "100" {
-            self.text = "Dark Green"
+            self.text = YAxis.darkGreen.localized()
         } else if text == "0" || text == "10" || text == "20" || text == "30" || text == "40" || text == "90" {
             self.text = ""
         } else {
@@ -45,3 +53,15 @@ public class ChartAxisLabel {
         self.settings = settings
     }
 }
+
+public extension String {
+    
+    func localized() -> String {
+        let languageCodeStr = NSUserDefaults.standardUserDefaults().stringForKey("userSelectedLanguage")
+        if let path = NSBundle.mainBundle().pathForResource(languageCodeStr?.characters.count > 0 ? languageCodeStr : "en", ofType: "lproj"), bundle = NSBundle(path: path) {
+            return bundle.localizedStringForKey(self, value: nil, table: nil)
+        }
+        return self
+    }
+}
+
