@@ -10,7 +10,7 @@ import UIKit
 
 /// A model of an axis label
 public class ChartAxisLabel {
-
+    
     struct YAxis {
         static let red          = "Red"
         static let orange       = "Orange"
@@ -18,12 +18,12 @@ public class ChartAxisLabel {
         static let lightGreen   = "Light Green"
         static let darkGreen    = "Dark Green"
     }
-
+    
     public let text: String
     let settings: ChartLabelSettings
-
+    
     var hidden: Bool = false
-
+    
     /// The size of the bounding rectangle for the axis label, taking into account the font and rotation it will be drawn with
     lazy var textSize: CGSize = {
         let size = ChartUtils.textSize(self.text, font: self.settings.font)
@@ -35,21 +35,22 @@ public class ChartAxisLabel {
     }()
     
     public init(text: String, settings: ChartLabelSettings) {
-        if text == "50" {
-            self.text = YAxis.red.localized()
-        } else if text == "60" {
-            self.text = YAxis.orange.localized()
-        } else if text == "70" {
-            self.text = YAxis.yellow.localized()
-        } else if text == "80" {
-            self.text = YAxis.lightGreen.localized()
-        } else if text == "100" {
-            self.text = YAxis.darkGreen.localized()
-        } else if text == "0" || text == "10" || text == "20" || text == "30" || text == "40" || text == "90" {
-            self.text = ""
-        } else {
-            self.text = text
-        }
+        //        if text == "50" {
+        //            self.text = YAxis.red.localized()
+        //        } else if text == "60" {
+        //            self.text = YAxis.orange.localized()
+        //        } else if text == "70" {
+        //            self.text = YAxis.yellow.localized()
+        //        } else if text == "80" {
+        //            self.text = YAxis.lightGreen.localized()
+        //        } else if text == "100" {
+        //            self.text = YAxis.darkGreen.localized()
+        //        } else if text == "0" || text == "10" || text == "20" || text == "30" || text == "40" || text == "90" {
+        //            self.text = ""
+        //        } else {
+        //            self.text = text
+        //        }
+        self.text = text
         self.settings = settings
     }
 }
